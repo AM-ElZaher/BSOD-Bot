@@ -14,12 +14,21 @@ print("Bot Started..!")
 
 def respond(input_text):
     user_message = str(input_text).lower()
-    try:
-        df = pd.read_csv("C:\\Users\\ahmed.elzaher\\OneDrive - Palm Hills Developments\\Documents\\PythonTest\\errCode.csv", sep=",")
-        searchResult = (list(df.loc[df['STOP Code'].str.lower() == user_message, 'Cause of the Blue Screen'])[0])
-        return (searchResult)
-    except:
-        return("No data found, check spelling or enter the exact error code")
+    if "hi" in user_message:
+        return"hello"
+    elif "how are you" in user_message:
+        return"fine, you?"
+    elif "how does it work" in user_message:
+        return "type /help to get some info"
+    else:
+        try:
+            df = pd.read_csv("C:\\Users\\ahmed.elzaher\\OneDrive - Palm Hills Developments\\Documents\\PythonTest\\errCode.csv", sep=",")
+            searchResult = (list(df.loc[df['STOP Code'].str.lower() == user_message, 'Cause of the Blue Screen'])[0])
+            return (searchResult)
+        except:
+            return("No data found, check spelling or enter the exact error code")
+
+    
   
 
 
@@ -28,6 +37,7 @@ def start_command(update, context):
 
 def help_command(update, context):
     update.message.reply_text('a Read me guide to help users')
+
 
 def handle_message(update, context):
     text = str(update.message.text)
